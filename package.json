@@ -13,6 +13,7 @@
     "test": "mocha --bail"
   },
   "dependencies": {
+    "@turf/boolean-point-in-polygon": "^6.0.1",
     "@turf/nearest-point-on-line": "^6.0.2"
   }
 }

@@ -123,3 +123,91 @@ describe('Line2', function () {
     assert.deepEqual(actual, expected)
   })
 })
+
+describe('MultiLineString', function () {
+  // Source: © OpenStreetMap contributors
+  let inputGeom = JSON.parse(fs.readFileSync('test/inputs/r163465.json'))
+
+  it ('1', function () {
+    let inputPt = {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ 16.3291285, 48.2027968 ]
+      }
+    }
+    let expected = {
+      "type": "Feature",
+      "properties": {
+        "dist": 0.04707428477293389,
+        "index": 29,
+        "location": 1.3351649549618807
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ 16.329760420272503, 48.202753931180844 ]
+
+      }
+    }
+
+    let actual = nearestPointOnGeometry(inputGeom, inputPt)
+
+    assert.deepEqual(actual, expected)
+  })
+})
+
+describe('Polygon', function () {
+  // Source: © OpenStreetMap contributors
+  let inputGeom = JSON.parse(fs.readFileSync('test/inputs/w24867729.json'))
+
+  it ('outer', function () {
+    let inputPt = {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ 16.3305369, 48.1972988 ]
+      }
+    }
+    let expected = {
+      "type": "Feature",
+      "properties": {
+        "dist": 0.04738346135585843,
+        "index": 5,
+        "location": 0.14028363679620684
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ 16.3308994, 48.1976498 ]
+      }
+    }
+
+    let actual = nearestPointOnGeometry(inputGeom, inputPt)
+
+    assert.deepEqual(actual, expected)
+  })
+
+  it ('inner', function () {
+    let inputPt = {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ 16.3311103, 48.1983119 ]
+      }
+    }
+    let expected = {
+      "type": "Feature",
+      "properties": {
+        "dist": 0,
+        "location": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ 16.3311103, 48.1983119 ]
+      }
+    }
+
+    let actual = nearestPointOnGeometry(inputGeom, inputPt)
+
+    assert.deepEqual(actual, expected)
+  })
+})
