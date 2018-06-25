@@ -5,5 +5,14 @@
   "main": "src/nearestPointOnGeometry.js",
   "repository": "git@github.com:plepe/nearest-point-on-geometry.git",
   "author": "Stephan Bösch-Plepelits <skunk@xover.mud.at>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  },
+  "scripts": {
+    "test": "mocha --bail"
+  },
+  "dependencies": {
+    "@turf/nearest-point-on-line": "^6.0.2"
+  }
 }
