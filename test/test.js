@@ -213,3 +213,60 @@ describe('Polygon', function () {
     chai.expect(actual).to.be.deep.almost(expected)
   })
 })
+
+describe('GeometryCollection', function () {
+  // Source: © OpenStreetMap contributors
+  let inputGeom = JSON.parse(fs.readFileSync('test/inputs/r3898175.json'))
+
+  it ('outer', function () {
+    let inputPt = {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ 16.3636228, 48.205817 ]
+      }
+    }
+    let expected = {
+      "type": "Feature",
+      "properties": {
+        "dist": 0.05525319728214965,
+        "index": 65,
+        "location": 0.5794003812848822
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ 16.3637569, 48.2053282 ]
+
+      }
+    }
+
+    let actual = nearestPointOnGeometry(inputGeom, inputPt)
+
+    chai.expect(actual).to.be.deep.almost(expected)
+  })
+
+  it ('inner', function () {
+    let inputPt = {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ 16.363673, 48.2048811 ]
+      }
+    }
+    let expected = {
+      "type": "Feature",
+      "properties": {
+        "dist": 0,
+        "location": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ 16.363673, 48.2048811 ]
+      }
+    }
+
+    let actual = nearestPointOnGeometry(inputGeom, inputPt)
+
+    chai.expect(actual).to.be.deep.almost(expected)
+  })
+})

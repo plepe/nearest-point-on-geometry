@@ -21,7 +21,30 @@ function nearestPointOnGeometry (feature, pt, options) {
         modifiedFeature.geometry.type = 'MultiLineString'
         return nearestPointOnGeometry(modifiedFeature, pt, options)
       }
+    case 'GeometryCollection':
+      let result = feature.geometry.geometries.map(geom => {
+        let modifiedFeature = {
+          type: 'Feature',
+          geometry: geom
+        }
+
+        return nearestPointOnGeometry(modifiedFeature, pt, options)
+      })
+
+      result = result.sort((a, b) => {
+        if (!a || !b) {
+          return null
+        }
+
+        return a.properties.dist - b.properties.dist
+      })
+
+      if (result.length > 0)
+        return result[0]
+
+      return
     default:
+      console.log('nearestPointOnGeometry: don\'t know how to handle ' + feature.geometry.type)
   }
 }
 
