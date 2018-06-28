@@ -1,6 +1,6 @@
 {
   "name": "nearest-point-on-geometry",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Takes a Point and a Geometry (Point, Polygon, LineString, GeometryCollection, ...) and calculates the closest Point on the Geometry using turf.",
   "main": "src/nearestPointOnGeometry.js",
   "repository": "git@github.com:plepe/nearest-point-on-geometry.git",
