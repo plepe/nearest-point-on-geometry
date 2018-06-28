@@ -12,8 +12,8 @@ function nearestPointOnGeometry (feature, pt, options) {
       if (turf.booleanPointInPolygon(pt, feature, options)) {
         let result = JSON.parse(JSON.stringify(pt))
         result.properties = {
-          "dist": 0,
-          "location": 0
+          'dist': 0,
+          'location': 0
         }
         return result
       } else {
@@ -39,8 +39,9 @@ function nearestPointOnGeometry (feature, pt, options) {
         return a.properties.dist - b.properties.dist
       })
 
-      if (result.length > 0)
+      if (result.length > 0) {
         return result[0]
+      }
 
       return
     default:
