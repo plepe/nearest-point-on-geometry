@@ -1,6 +1,8 @@
 const nearestPointOnGeometry = require('../src/nearestPointOnGeometry')
-const assert = require('assert')
 const fs = require('fs')
+const chai = require('chai')
+const chaiAlmost = require('chai-almost')
+chai.use(chaiAlmost())
 
 describe('Line1', function () {
   let inputGeom = {
@@ -37,7 +39,7 @@ describe('Line1', function () {
 
     let actual = nearestPointOnGeometry(inputGeom, inputPt)
 
-    assert.deepEqual(actual, expected)
+    chai.expect(actual).to.be.deep.almost(expected)
   })
 
   it ('2', function () {
@@ -63,7 +65,7 @@ describe('Line1', function () {
 
     let actual = nearestPointOnGeometry(inputGeom, inputPt)
 
-    assert.deepEqual(actual, expected)
+    chai.expect(actual).to.be.deep.almost(expected)
   })
 })
 
@@ -94,7 +96,7 @@ describe('Line2', function () {
 
     let actual = nearestPointOnGeometry(inputGeom, inputPt)
 
-    assert.deepEqual(actual, expected)
+    chai.expect(actual).to.be.deep.almost(expected)
   })
 
   it ('2', function () {
@@ -120,7 +122,7 @@ describe('Line2', function () {
 
     let actual = nearestPointOnGeometry(inputGeom, inputPt)
 
-    assert.deepEqual(actual, expected)
+    chai.expect(actual).to.be.deep.almost(expected)
   })
 })
 
@@ -152,7 +154,7 @@ describe('MultiLineString', function () {
 
     let actual = nearestPointOnGeometry(inputGeom, inputPt)
 
-    assert.deepEqual(actual, expected)
+    chai.expect(actual).to.be.deep.almost(expected)
   })
 })
 
@@ -183,7 +185,7 @@ describe('Polygon', function () {
 
     let actual = nearestPointOnGeometry(inputGeom, inputPt)
 
-    assert.deepEqual(actual, expected)
+    chai.expect(actual).to.be.deep.almost(expected)
   })
 
   it ('inner', function () {
@@ -208,6 +210,6 @@ describe('Polygon', function () {
 
     let actual = nearestPointOnGeometry(inputGeom, inputPt)
 
-    assert.deepEqual(actual, expected)
+    chai.expect(actual).to.be.deep.almost(expected)
   })
 })
