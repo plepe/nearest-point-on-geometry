@@ -4,6 +4,8 @@ const turf = {
 }
 
 function nearestPointOnGeometry (feature, pt, options) {
+  var result
+
   switch (feature.geometry.type) {
     case 'LineString':
     case 'MultiLineString':
@@ -21,8 +23,34 @@ function nearestPointOnGeometry (feature, pt, options) {
         modifiedFeature.geometry.type = 'MultiLineString'
         return nearestPointOnGeometry(modifiedFeature, pt, options)
       }
+    case 'MultiPolygon':
+      result = feature.geometry.coordinates.map(coord => {
+        let modifiedFeature = {
+          type: 'Feature',
+          geometry: {
+            type: 'Polygon',
+            coordinates: coord
+          }
+        }
+
+        return nearestPointOnGeometry(modifiedFeature, pt, options)
+      })
+
+      result = result.sort((a, b) => {
+        if (!a || !b) {
+          return null
+        }
+
+        return a.properties.dist - b.properties.dist
+      })
+
+      if (result.length > 0) {
+        return result[0]
+      }
+
+      return
     case 'GeometryCollection':
-      let result = feature.geometry.geometries.map(geom => {
+      result = feature.geometry.geometries.map(geom => {
         let modifiedFeature = {
           type: 'Feature',
           geometry: geom
