@@ -40,6 +40,8 @@ function nearestPointOnGeometry (feature, pt, options) {
         return nearestPointOnGeometry(modifiedFeature, pt, options)
       })
 
+      result = result.filter(o => o)
+
       result = result.sort((a, b) => {
         if (!a || !b) {
           return null
@@ -62,6 +64,8 @@ function nearestPointOnGeometry (feature, pt, options) {
 
         return nearestPointOnGeometry(modifiedFeature, pt, options)
       })
+
+      result = result.filter(o => o)
 
       result = result.sort((a, b) => {
         if (!a || !b) {
