@@ -6,6 +6,10 @@ const turf = {
 function nearestPointOnGeometry (feature, pt, options) {
   var result
 
+  if (!feature.geometry) {
+    return null
+  }
+
   switch (feature.geometry.type) {
     case 'LineString':
     case 'MultiLineString':
